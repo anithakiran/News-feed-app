@@ -1,4 +1,4 @@
-import NewsFeed from "./NewsFeed";
+import NewsFeed from "../components/ui/NewsFeed";
 
 export default function Home() {
   return (
