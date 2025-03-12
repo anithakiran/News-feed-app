@@ -13,16 +13,16 @@ interface NewsItem {
 
 export default function NewsFeed() {
   const [newsData, setNewsData] = useState<NewsItem[]>([]);
-  const [hovered, setHovered] = useState(false);
+  const [hoveredId, setHoveredId] = useState<number | null>(null); // Track hovered news item
 
-  //To Fetch new news data on page load we use this use effect hooks
+  // Fetch new news data on page load
   useEffect(() => {
     setNewsData(generateRandomNews());
   }, []);
 
   return (
     <div className="bg-gray-900 min-h-screen text-white p-6">
-      {/* it is a Header data */}
+      {/* Header */}
       <header className="container mx-auto flex justify-between items-center py-6">
         <motion.h1
           className="text-3xl font-bold text-zinc-300"
@@ -43,7 +43,7 @@ export default function NewsFeed() {
         </motion.h3>
 
         <div className="flex items-center space-x-2">
-          {/* Input Field with Fade-In */}
+          {/* Search Input */}
           <motion.input
             type="text"
             placeholder="Search news..."
@@ -53,7 +53,7 @@ export default function NewsFeed() {
             transition={{ duration: 1, delay: 0.5 }}
           />
 
-          {/* Search Button with Hover Effects */}
+          {/* Search Button */}
           <motion.button
             className="bg-blue-500 px-4 py-2 rounded-md hover:bg-blue-600"
             whileHover={{ scale: 1.05, opacity: 0.8 }}
@@ -66,10 +66,19 @@ export default function NewsFeed() {
           </motion.button>
         </div>
       </header>
-      {/* it is a  News Feed */}
+
+      {/* News Feed */}
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
         {newsData.map((news) => (
-          <div key={news.id} className="bg-gray-800 p-4 rounded-lg shadow-md">
+          <motion.div
+            key={news.id}
+            className={`bg-gray-800 p-4 rounded-lg shadow-md transition duration-300 ${
+              hoveredId === news.id ? "bg-gray-700 scale-105" : ""
+            }`}
+            onMouseEnter={() => setHoveredId(news.id)}
+            onMouseLeave={() => setHoveredId(null)}
+            whileHover={{ scale: 1.05 }}
+          >
             <div className="relative w-full h-40">
               <Image
                 src={news.image}
@@ -81,7 +90,7 @@ export default function NewsFeed() {
             </div>
             <h2 className="text-xl font-semibold mt-4">{news.title}</h2>
             <p className="text-gray-400 mt-2">{news.description}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
