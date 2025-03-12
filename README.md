@@ -41,4 +41,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 Explanation of code 
 * "use client" ---> indicates components should be render has client
-* import statements 
+*  useState ---> to store data with in individual components
+*  useEffect ---> to perform action like http requests (or) working with browser API
+*  Image ---> component or tool used to optimize for better display
+*  generateRandomNews  ---> a file with random dummy data for project to work.
+*  interface ---> name: NewsItems attributes like id,title,description and image
+*  function ---> name NewsFeed, usestate to stoore newsdata in array initially array will be empty, useEffect calls gemerateaRandomnews and updates it.
+*  <Header> ---> contains projec name, searchbar and piece of text
+* <>
